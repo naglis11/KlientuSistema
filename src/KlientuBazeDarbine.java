@@ -11,9 +11,9 @@ public class KlientuBazeDarbine {
 	
 		List<Klientas> klientuBaze = new ArrayList<>();
 		
-		klientuBaze.add(new Klientas("Rūta", "Norkutė", 'M', "1998.01.03", "869999999", "1"));
-		klientuBaze.add(new Klientas("Tomas", "Malinauskas", 'V', "1985.02.04", "86000000", "3"));
-		klientuBaze.add(new Klientas("Lina", "Kazlauskienė", 'M', "1967.04.06", "86888888", "2"));
+		klientuBaze.add(new Klientas("Rūta", "Norkutė", "M", "1998.01.03", "869999999", "1"));
+		klientuBaze.add(new Klientas("Tomas", "Malinauskas", "V", "1985.02.04", "86000000", "3"));
+		klientuBaze.add(new Klientas("Lina", "Kazlauskienė", "M", "1967.04.06", "86888888", "2"));
 		
 		return klientuBaze;
 	}
