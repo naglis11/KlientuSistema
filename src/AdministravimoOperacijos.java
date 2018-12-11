@@ -12,8 +12,10 @@ import org.naglis.kls.procesai.comp.PagalVarda;
 
 public class AdministravimoOperacijos {
 
-	List<Klientas> klientuBaze = new ArrayList<>();
-	
+	KlientuBazeDarbine darbiniai = new KlientuBazeDarbine();
+
+	List<Klientas> klientuBaze = darbiniai.bazesPapildymas();
+
 	public void pridetiKlienta(Klientas naujasKlientas) {
 
 		klientuBaze.add(naujasKlientas);
@@ -30,24 +32,24 @@ public class AdministravimoOperacijos {
 
 			Collections.sort(rikiuojamaBaze, new PagalVarda());
 			for (int i = 0; i < rikiuojamaBaze.size(); i++) {
-			rikiuojamaBaze.get(i);
-			break;
+				rikiuojamaBaze.get(i);
+				break;
 			}
-			
+
 		case pagalPavarde:
 
 			Collections.sort(rikiuojamaBaze, new PagalId());
 			for (int i = 0; i < rikiuojamaBaze.size(); i++) {
-			rikiuojamaBaze.get(i);
-			break;
+				rikiuojamaBaze.get(i);
+				break;
 			}
-			
+
 		case pagalID:
 
 			Collections.sort(rikiuojamaBaze, new PagalPavarde());
 			for (int i = 0; i < rikiuojamaBaze.size(); i++) {
-			rikiuojamaBaze.get(i);
-			break;
+				rikiuojamaBaze.get(i);
+				break;
 			}
 		}
 
@@ -55,54 +57,40 @@ public class AdministravimoOperacijos {
 
 	}
 
-	public List<Klientas> paieska(PaieskosKriterijai pKriterijus, String pZodis) {
-		
+	public List<Klientas> paieska(PaieskosKriterijai pKriterijus) {
+
 		List<Klientas> paieskosRezultatai = new ArrayList<>();
-		if (pKriterijus.isaVardas() == true) {
-			
-			for (Klientas klientas : klientuBaze) {
-				if (klientas.getVardas().toLowerCase().contains(pZodis.toLowerCase())) {
-					paieskosRezultatai.add(klientas);
-				}
-			} 
+
+		for (Klientas klientas : klientuBaze) {
+			if (pKriterijus.isaVardas() == true) {
+				metodas(paieskosRezultatai, klientas, klientas.getVardas(), pKriterijus.getVardas());
+			}
+			if (pKriterijus.isaPavarde() == true) {
+				metodas(paieskosRezultatai, klientas, klientas.getPavarde(), pKriterijus.getPavarde());
+
+			}
+			if (pKriterijus.isaLytis() == true) {
+				metodas(paieskosRezultatai, klientas, klientas.getLytis(), pKriterijus.getLytis());
+
+			}
+			if (pKriterijus.isaGimimoData() == true) {
+				metodas(paieskosRezultatai, klientas, klientas.getGimimoData(), pKriterijus.getGimimoData());
+
+			}
+			if (pKriterijus.isaTelefonas() == true) {
+				metodas(paieskosRezultatai, klientas, klientas.getTelefonas(), pKriterijus.getTelefonas());
+
+			}
 		}
-		
-		if (pKriterijus.isaPavarde() == true) {
-			
-			for (Klientas klientas : klientuBaze) {
-				if (klientas.getPavarde().toLowerCase().contains(pZodis.toLowerCase())) {
-					paieskosRezultatai.add(klientas);
-				}
-			} 
-		}
-		
-		if (pKriterijus.isaLytis() == true) {
-			
-			for (Klientas klientas : klientuBaze) {
-				if (klientas.getLytis().toLowerCase().contains(pZodis.toLowerCase())) {
-					paieskosRezultatai.add(klientas);
-				}
-			} 
-		}
-		
-		if (pKriterijus.isaGimimoData() == true) {
-			
-			for (Klientas klientas : klientuBaze) {
-				if (klientas.getGimimoData().toLowerCase().contains(pZodis.toLowerCase())) {
-					paieskosRezultatai.add(klientas);
-				}
-			} 
-		}
-		
-		if (pKriterijus.isaTelefonas() == true) {
-			
-			for (Klientas klientas : klientuBaze) {
-				if (klientas.getTelefonas().toLowerCase().contains(pZodis.toLowerCase())) {
-					paieskosRezultatai.add(klientas);
-				}
-			} 
-		}
+
 		return paieskosRezultatai;
+	}
+
+	private void metodas(List<Klientas> paieskosRezultatai, Klientas klientas, String vardas, String vardas2) {
+		if (vardas.toLowerCase().contains(vardas2.toLowerCase())) {
+			paieskosRezultatai.add(klientas);
+		}
+
 	}
 
 	public boolean atnaujinimas(PaieskosKriterijai pKriterijus) {
