@@ -24,78 +24,57 @@ public class AdministravimoOperacijos {
 
 	public List<Klientas> pateiktiSarasa(RikiavimasPagal rikiavimas) {
 
-		List<Klientas> rikiuojamaBaze = klientuBaze;
-
 		switch (rikiavimas) {
 
 		case pagalVarda:
-
-			Collections.sort(rikiuojamaBaze, new PagalVarda());
-			for (int i = 0; i < rikiuojamaBaze.size(); i++) {
-				rikiuojamaBaze.get(i);
-				break;
-			}
-
+			Collections.sort(klientuBaze, new PagalVarda());
+			break;
+			
 		case pagalPavarde:
-
-			Collections.sort(rikiuojamaBaze, new PagalId());
-			for (int i = 0; i < rikiuojamaBaze.size(); i++) {
-				rikiuojamaBaze.get(i);
-				break;
-			}
-
+			Collections.sort(klientuBaze, new PagalPavarde());
+			break;
+			
 		case pagalID:
-
-			Collections.sort(rikiuojamaBaze, new PagalPavarde());
-			for (int i = 0; i < rikiuojamaBaze.size(); i++) {
-				rikiuojamaBaze.get(i);
-				break;
-			}
+			Collections.sort(klientuBaze, new PagalId());
+			break;
 		}
 
-		return rikiuojamaBaze;
+		return klientuBaze;
 
 	}
 
-	public List<Klientas> paieska(PaieskosKriterijai pKriterijus) {
+	public List<Klientas> paieskosKriterijausParinkimas(PaieskosKriterijai pKriterijus) {
 
 		List<Klientas> paieskosRezultatai = new ArrayList<>();
 
 		for (Klientas klientas : klientuBaze) {
 			if (pKriterijus.isaVardas() == true) {
-				metodas(paieskosRezultatai, klientas, klientas.getVardas(), pKriterijus.getVardas());
+				paieska(paieskosRezultatai, klientas, klientas.getVardas(), pKriterijus.getVardas());
 			}
 			if (pKriterijus.isaPavarde() == true) {
-				metodas(paieskosRezultatai, klientas, klientas.getPavarde(), pKriterijus.getPavarde());
+				paieska(paieskosRezultatai, klientas, klientas.getPavarde(), pKriterijus.getPavarde());
 			}
 			if (pKriterijus.isaLytis() == true) {
-				metodas(paieskosRezultatai, klientas, klientas.getLytis(), pKriterijus.getLytis());
+				paieska(paieskosRezultatai, klientas, klientas.getLytis(), pKriterijus.getLytis());
 			}
 			if (pKriterijus.isaGimimoData() == true) {
-				metodas(paieskosRezultatai, klientas, klientas.getGimimoData(), pKriterijus.getGimimoData());
+				paieska(paieskosRezultatai, klientas, klientas.getGimimoData(), pKriterijus.getGimimoData());
 			}
 			if (pKriterijus.isaTelefonas() == true) {
-				metodas(paieskosRezultatai, klientas, klientas.getTelefonas(), pKriterijus.getTelefonas());
+				paieska(paieskosRezultatai, klientas, klientas.getTelefonas(), pKriterijus.getTelefonas());
 			}
 		}
 
 		return paieskosRezultatai;
 	}
 
-	private void metodas(List<Klientas> paieskosRezultatai, Klientas klientas, String tekstasBazeje, String ieskomasTekstas) {
+	private void paieska(List<Klientas> paieskosRezultatai, Klientas klientas, String tekstasBazeje, String ieskomasTekstas) {
 		if (tekstasBazeje.toLowerCase().contains(ieskomasTekstas.toLowerCase())) {
 			paieskosRezultatai.add(klientas);
 		}
 
 	}
 
-//	public boolean atnaujinimas(PaieskosKriterijai pKriterijus) {
-//		
-//		Klientas naujiDuomenys = new Klientas();
-//		klientuBaze.set(2, naujiDuomenys);
-//		
-//		
-//		return false;
-//	}
+
 
 }
