@@ -1,10 +1,11 @@
 package org.naglis.kls.procesai;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.naglis.kls.data.IData;
+import org.naglis.kls.data.KlientuBazeDarbine;
 import org.naglis.kls.modelis.Klientas;
 import org.naglis.kls.procesai.comp.PagalId;
 import org.naglis.kls.procesai.comp.PagalPavarde;
@@ -12,9 +13,19 @@ import org.naglis.kls.procesai.comp.PagalVarda;
 
 public class AdministravimoOperacijos {
 
-	KlientuBazeDarbine darbiniai = new KlientuBazeDarbine();
+	private IData darbiniai = null;
 
-	List<Klientas> klientuBaze = darbiniai.bazesPapildymas();
+	private List<Klientas> klientuBaze;
+
+	public AdministravimoOperacijos() {
+		darbiniai = new KlientuBazeDarbine(); // TODO
+		klientuBaze = darbiniai.bazesPapildymas();
+	}
+
+	public AdministravimoOperacijos(IData darbiniai) {
+		this.darbiniai = darbiniai;
+		klientuBaze = darbiniai.bazesPapildymas();
+	}
 
 	public void pridetiKlienta(Klientas naujasKlientas) {
 
@@ -29,11 +40,11 @@ public class AdministravimoOperacijos {
 		case pagalVarda:
 			Collections.sort(klientuBaze, new PagalVarda());
 			break;
-			
+
 		case pagalPavarde:
 			Collections.sort(klientuBaze, new PagalPavarde());
 			break;
-			
+
 		case pagalID:
 			Collections.sort(klientuBaze, new PagalId());
 			break;
@@ -68,13 +79,12 @@ public class AdministravimoOperacijos {
 		return paieskosRezultatai;
 	}
 
-	private void paieska(List<Klientas> paieskosRezultatai, Klientas klientas, String tekstasBazeje, String ieskomasTekstas) {
+	private void paieska(List<Klientas> paieskosRezultatai, Klientas klientas, String tekstasBazeje,
+			String ieskomasTekstas) {
 		if (tekstasBazeje.toLowerCase().contains(ieskomasTekstas.toLowerCase())) {
 			paieskosRezultatai.add(klientas);
 		}
 
 	}
-
-
 
 }
