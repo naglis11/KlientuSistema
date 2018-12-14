@@ -5,10 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
-
-import org.junit.Assert;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.naglis.kls.modelis.Klientas;
 import org.naglis.kls.procesai.AdministravimoOperacijos;
 import org.naglis.kls.procesai.PaieskosKriterijai;
@@ -31,7 +28,8 @@ public class AdministravimoOperacijosTest {
 		List<Klientas> rezultatas = underTest.paieskosKriterijausParinkimas(kriterijus);
 		
 		boolean arLygu = false;
-		arLygu = bandomasis.equals(rezultatas);
+		
+		arLygu = bandomasis.toString().contentEquals(rezultatas.toString());
 		
 		assertEquals(arLygu, true);
 				
