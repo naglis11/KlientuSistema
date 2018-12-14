@@ -31,7 +31,7 @@ public class App {
 		kriterijus.setaPavarde(true);
 		kriterijus.setPavarde("Malinas");
 
-		List<Klientas> paieskosRez = operacija.paieska(kriterijus);
+		List<Klientas> paieskosRez = operacija.paieskosKriterijausParinkimas(kriterijus);
 
 		for (Klientas klientas : paieskosRez) {
 			System.out.println(klientas);
